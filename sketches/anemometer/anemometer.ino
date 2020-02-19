@@ -36,12 +36,12 @@ const char* ssid = "DUMBLEDORE";
 const char* password = "frederic";
 
 #define MQTT_CLIENT_ID "AnemometerSensor"
-#define MAX_RETRY 100
+#define MAX_RETRY 500
 
 WiFiClient espClient;
 PubSubClient client(espClient);
 
-#define DEBUG 1
+#define DEBUG 0
 #define FIRMWARE_VERSION "1.0"
 
 const int VOLTAGE_PIN = A0;
@@ -50,7 +50,9 @@ const int SENSOR_PIN = D2;
 void ICACHE_RAM_ATTR OnRotation();
 
 // one hour = 3600 s
-const int sleepTimeS = 5; //One Hour
+// half hour = 1800 s
+// quarter hour = 900 s
+const int sleepTimeS = 900; 
 volatile long debouncing_time = 15; //Debouncing Time in Milliseconds
 volatile unsigned long last_micros;
 unsigned long last_millis = 0;
@@ -72,7 +74,8 @@ Sensor sensors[SENSORS_COUNT];
 
 void setup() {
 
- pinMode(SENSOR_PIN, INPUT_PULLUP);  
+  //Sensor goes low when detected
+  pinMode(SENSOR_PIN, INPUT_PULLUP);  
   
   // Initialize Serial Port
   if (DEBUG)
@@ -105,20 +108,22 @@ void loop() {
   if (millis() - last_millis >= analyseWindSpeedTime ) { 
     detachInterrupt(SENSOR_PIN);
     
-    debug_message("Rotation within 5s : " + String(rpmcount), true);
-
-    rpmcount = 0;
+    debug_message("Rotation within 5s : " + String(rpmcount), true);    
     
     //Five second between two recording...
-    delay(2000);      
-    hasStarted = true;
-    last_millis = millis() ; //Not useful (will restart)    
-  }
+    //delay(2000);      
+    //hasStarted = true;
+    //last_millis = millis() ; //Not useful (will restart)    
 
-  //debug_message("Sending results...", true);
-  //SendResult();
-  debug_message("Going to sleep...na night", true);
-  ESP.deepSleep(sleepTimeS * 1000000);
+    //debug_message("Sending results...", true);
+    SendResult();
+
+    //Not mandatory...
+    rpmcount = 0;
+    
+    debug_message("Going to sleep...na night", true);
+    ESP.deepSleep(sleepTimeS * 1000000);
+  }  
 }
 
 void SendResult() {
@@ -191,7 +196,8 @@ String ConvertToJSon(String battery) {
     root["firmware"]  = FIRMWARE_VERSION;
     root["battery"] = battery;
     //Rotation per minute
-    //root["rpm"] = liter;    
+    root["rpm"] = String(rpmcount);
+    root["vitesse"] = String("0");
     //root["cft"] = String(literConsumedFromStart);
     
     String result;    
