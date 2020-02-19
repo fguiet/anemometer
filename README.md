@@ -6,7 +6,7 @@ The place where I live is very windy most of the time. I thought it would be fun
 
 ## Measurement timing
 
-Adjustable in the code. I set it up to one sample of 5s every 1 minutes.
+Adjustable in the code. I set it up to one sample of 5s every 15 minutes.
 
 ## Specifications
 
