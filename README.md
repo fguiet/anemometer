@@ -40,6 +40,8 @@ I included a mount system that fits on H pole like this one :
 
 ![Sweet](images/h_pole.jpg)
 
+If needed, I can provide the 3d model solar panel holder
+
 ## In real life
 
 Alive :) : https://www.youtube.com/watch?v=_qRGHen_nGQ
@@ -47,6 +49,10 @@ Alive :) : https://www.youtube.com/watch?v=_qRGHen_nGQ
 * Sweet 
 
 ![Sweet](images/sweet.jpg)
+
+* In place with solar panel
+
+![Sweet](images/in_place_with_solarpanel.jpg)
 
 * Alltogether
 
