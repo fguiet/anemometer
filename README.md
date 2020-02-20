@@ -22,6 +22,7 @@ This project is made up of :
 * 3.7v Lithium battery (1200 mAh)
 * [Bearing 608ZZ](https://www.aliexpress.com/wholesale?catId=0&initiative_id=SB_20200219052438&SearchText=bearing+608)
 * [2 neodymium magnets (8mm)](https://www.aliexpress.com/item/32959402237.html?spm=a2g0o.productlist.0.0.6cb72867YDYB0k&algo_pvid=abf99058-7d96-46d5-b91b-2a17fd93094b&algo_expid=abf99058-7d96-46d5-b91b-2a17fd93094b-1&btsid=0b0a187915821195934654449ebf18&ws_ab_test=searchweb0_0,searchweb201602_,searchweb201603_)
+* Some nuts and bolts
 
 ## Wiring
 
