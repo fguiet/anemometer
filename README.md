@@ -63,3 +63,6 @@ Alive :) : https://www.youtube.com/watch?v=_qRGHen_nGQ
 
 ![Hall sensor](images/inside.jpg)
 
+* Grafana : battery and wind monitoring
+
+![Hall sensor](images/grafana.jpg)
