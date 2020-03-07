@@ -28,7 +28,7 @@ This project is made up of :
 
 Quite easy : 
 
-* Wire positive and negative 3.7v battery to Wemos (3.3v), Voltage divider, Hall Sensor, TP4056 
+* Wire positive and negative 3.7v battery to Wemos (Careful connect to 5v pin, not 3.3v !!), Voltage divider, Hall Sensor, TP4056 
 * D2 to output of hall effect sensor
 * A0 to ouput of voltage divider
 * D0 and Reset should be connected (required for deep sleep to work smoothly)
