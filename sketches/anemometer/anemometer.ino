@@ -7,6 +7,7 @@ Anemometer
   
   Version            : 1.0
   History            : 1.0 - First version                       
+                       1.1 - 2020/09/13 - Update librairies version, add linear regression
                        
 References :   
 
@@ -21,6 +22,25 @@ Deep sleep : Wemos + hall sensor + voltage divider : 1.6mA
 
 
 For deep sleep to work D0 must be connected to RESET 
+
+Librairies used :
+
+  - Arduino IDE 1.8.13
+  - esp8266 v2.7.4
+  - ArduinoJson  6.16.1
+  - PubSubClient 2.8.0
+
+Values measured with my car
+
+30km/h => 34
+40km/h => 50
+50km/h => 65
+60km/h => 82
+70km/h => 92
+80km/h => 100
+
+With Excel:
+y = 1.3514x - 3.8286
 
 */
 
@@ -52,6 +72,7 @@ void ICACHE_RAM_ATTR OnRotation();
 // one hour = 3600 s
 // half hour = 1800 s
 // quarter hour = 900 s
+// DEBUG 5s
 const int sleepTimeS = 900; 
 volatile long debouncing_time = 15; //Debouncing Time in Milliseconds
 volatile unsigned long last_micros;
@@ -116,7 +137,9 @@ void loop() {
     //last_millis = millis() ; //Not useful (will restart)    
 
     //debug_message("Sending results...", true);
-    SendResult();
+
+    if (!DEBUG)
+      SendResult();
 
     //Not mandatory...
     rpmcount = 0;
@@ -197,7 +220,13 @@ String ConvertToJSon(String battery) {
     root["battery"] = battery;
     //Rotation per minute
     root["rpm"] = String(rpmcount);
-    root["vitesse"] = String("0");
+
+    float y = 1.3514 * rpmcount - 3.8286;
+
+    if (y < 0) 
+      y = 0;
+    
+    root["vitesse"] = String(y,0);
     //root["cft"] = String(literConsumedFromStart);
     
     String result;    
